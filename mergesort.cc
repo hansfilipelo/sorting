@@ -22,20 +22,31 @@ void merge(vector<string>& fileContent,int first,int median,int last){
     for (int i = first; i <= median; i++) {
         lowerBuffer.push_back(fileContent.at(i));
     }
-    for (int i = median+1; i < last; i++) {
+    for (int i = median+1; i <= last; i++) {
         upperBuffer.push_back(fileContent.at(i));
     }
     
-    int i = 0;
+    int i = first;
     while ( !(lowerBuffer.empty() || upperBuffer.empty()) ) {
         if ( lowerBuffer.front() <= upperBuffer.front() ) {
-            fileContent.at(i) = lowerBuffer.front();
+            //cout << lowerBuffer.front() << " before " << upperBuffer.front() << endl;
+            fileContent.at(i++) = lowerBuffer.front();
             lowerBuffer.erase(lowerBuffer.begin()+0);
         }
         else{
-            fileContent.at(i) = upperBuffer.front();
+            //cout << upperBuffer.front() << " before " << lowerBuffer.front() << endl;
+            fileContent.at(i++) = upperBuffer.front();
             upperBuffer.erase(upperBuffer.begin()+0);
         }
+    }
+    
+    while (!lowerBuffer.empty()) {
+        fileContent.at(i++) = lowerBuffer.front();
+        lowerBuffer.erase(lowerBuffer.begin()+0);
+    }
+    while (!upperBuffer.empty()) {
+        fileContent.at(i++) = upperBuffer.front();
+        upperBuffer.erase(lowerBuffer.begin()+0);
     }
     
 }
