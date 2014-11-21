@@ -16,6 +16,8 @@ void printHelp(char* scriptName){
 
 void merge(vector<string>& fileContent,int first,int median,int last){
     
+    int i;
+    
     vector<string> lowerBuffer;
     vector<string> upperBuffer;
     
@@ -26,15 +28,13 @@ void merge(vector<string>& fileContent,int first,int median,int last){
         upperBuffer.push_back(fileContent.at(i));
     }
     
-    int i = first;
+    i = first;
     while ( !(lowerBuffer.empty() || upperBuffer.empty()) ) {
         if ( lowerBuffer.front() <= upperBuffer.front() ) {
-            //cout << lowerBuffer.front() << " before " << upperBuffer.front() << endl;
             fileContent.at(i++) = lowerBuffer.front();
             lowerBuffer.erase(lowerBuffer.begin()+0);
         }
         else{
-            //cout << upperBuffer.front() << " before " << lowerBuffer.front() << endl;
             fileContent.at(i++) = upperBuffer.front();
             upperBuffer.erase(upperBuffer.begin()+0);
         }
@@ -46,7 +46,7 @@ void merge(vector<string>& fileContent,int first,int median,int last){
     }
     while (!upperBuffer.empty()) {
         fileContent.at(i++) = upperBuffer.front();
-        upperBuffer.erase(lowerBuffer.begin()+0);
+        upperBuffer.erase(upperBuffer.begin()+0);
     }
     
 }
