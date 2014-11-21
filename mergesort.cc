@@ -22,7 +22,7 @@ void merge(vector<string>& fileContent,int first,int median,int last){
     for (int i = first; i <= median; i++) {
         lowerBuffer.push_back(fileContent.at(i));
     }
-    for (int i = median+1; i <= last; i++) {
+    for (int i = median+1; i < last; i++) {
         upperBuffer.push_back(fileContent.at(i));
     }
     
@@ -42,9 +42,9 @@ void merge(vector<string>& fileContent,int first,int median,int last){
 
 void mergeSort(vector<string>& fileContent,int first,int last) {
     
-    int median = last/2;
+    int median = (first+last)/2;
     
-    if (last > 0) {
+    if ( first < last ) {
         mergeSort(fileContent,first,median);
         mergeSort(fileContent,median+1,last);
         merge(fileContent,first,median,last);
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) {
     
     // Remaining arg is a filepath, read the contents.
     filePath = argVector[0];
-    ifstream readStream(filePath);
+    ifstream readStream(filePath.c_str());
     string line;
     
     if ( readStream.is_open() ) {
