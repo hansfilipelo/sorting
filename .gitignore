@@ -30,3 +30,6 @@
 # Mac OS files. 
 .DS_Store
 
+# No idea what this is..
+*..dSYM
+
